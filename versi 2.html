@@ -1,0 +1,379 @@
+ <!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Synthwave Neon - Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="icon" href="https://files.catbox.moe/hfevmk.jpg" type="image/png">
+
+  <style>
+    /* Variabel Warna Neon */
+    :root {
+      --neon-blue: #00e5ff; /* Warna Neon Utama */
+      --neon-glow: 0 0 10px #00e5ff, 0 0 20px #00e5ff80;
+      --dark-bg: #11111a;
+      --card-bg: rgba(20, 20, 30, 0.5);
+      --border-color: rgba(0, 229, 255, 0.3);
+      --text-color: #f0f0f0;
+      --placeholder-color: #a0a0b0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      /* Background lebih gelap dan solid untuk kontras neon yang maksimal */
+      background: var(--dark-bg);
+      font-family: 'Rajdhani', 'Poppins', sans-serif;
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Menghilangkan background image di body agar particles lebih terlihat */
+    
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      /* Tambahkan efek visual background subtle */
+      background: radial-gradient(circle at center, #1a1a2e 0%, #11111a 100%);
+    }
+
+    .login-container {
+      position: relative;
+      z-index: 2;
+      /* Glassmorphism/Dark Card Effect lebih menonjol */
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(12px) saturate(180%);
+      padding: 45px 35px;
+      border-radius: 20px;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 0 35px rgba(0, 229, 255, 0.1), 0 0 15px rgba(0, 0, 0, 0.7);
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo {
+      width: 110px;
+      /* Neon Glow untuk logo */
+      filter: drop-shadow(0 0 15px var(--neon-blue)) drop-shadow(0 0 5px rgba(0,0,0,0.5));
+      margin-bottom: 15px;
+    }
+
+    .title {
+      font-size: 38px;
+      color: var(--neon-blue);
+      text-shadow: var(--neon-glow);
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #99aaff;
+      margin-bottom: 30px;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .form-group i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--neon-blue); /* Ikon ikut warna neon */
+      font-size: 18px;
+      text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
+      transition: color 0.3s ease;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 15px 15px 15px 50px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-color);
+      font-size: 16px;
+      font-family: 'Rajdhani', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--neon-blue);
+      background: rgba(0, 229, 255, 0.05);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+    
+    .form-control:focus + i {
+      color: var(--text-color);
+    }
+
+    .form-control::placeholder {
+      color: var(--placeholder-color);
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      /* Gradient Neon yang lebih mencolok */
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: white;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Rajdhani', sans-serif;
+      margin-top: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      /* Efek neon awal */
+      box-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
+    }
+
+    .btn-login:hover {
+      background: linear-gradient(90deg, #00e5ff, #0088ff);
+      transform: scale(1.02);
+      /* Efek glow yang lebih kuat saat hover */
+      box-shadow: var(--neon-glow);
+    }
+    
+    .btn-login i {
+        margin-right: 8px;
+    }
+
+    .btn-access {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--neon-blue);
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 500;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-color);
+      font-family: 'Rajdhani', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-access:hover {
+      background: rgba(0, 229, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+      color: #fff;
+    }
+
+    .footer {
+      margin-top: 35px;
+      text-align: center;
+      font-size: 13px;
+      color: #556688;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    }
+
+    /* === NOTIFICATION STYLING UPDATE === */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      border-radius: 10px;
+      background: rgba(10, 10, 20, 0.95);
+      color: white;
+      z-index: 1000;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+      transform: translateX(100vw);
+      transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      border-left: 5px solid var(--neon-blue);
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification i {
+      font-size: 20px;
+    }
+
+    .notification.error {
+      background: rgba(30, 0, 0, 0.95);
+      border-left-color: #ff4444;
+      color: #ffcccc;
+    }
+
+    .notification.success {
+      background: rgba(0, 30, 0, 0.95);
+      border-left-color: #44ff44;
+      color: #ccffcc;
+    }
+
+    /* === MEDIA QUERIES UPDATE === */
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 35px 25px;
+        width: 95%;
+      }
+      .title { font-size: 32px; }
+      .subtitle { font-size: 14px; }
+      .form-control { padding: 12px 12px 12px 45px; font-size: 15px; }
+      .btn-login, .btn-access { padding: 13px; font-size: 16px; }
+      .form-group i { left: 15px; font-size: 16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="particles"></div>
+  
+  <div class="login-container">
+    <div class="logo-container">
+      <img src="https://iili.io/faZy75J.png" alt="Neon Invictus Logo" class="logo">
+      <div class="title">KELATE MEMEY KACIP</div>
+      <div class="subtitle">Welcome To MurBug Whatsapp Version By Mann Force X </div>
+    </div>
+
+    <form method="POST" action="/auth" id="loginForm">
+      <div class="form-group">
+        <i class="fas fa-user"></i>
+        <input type="text" name="username" class="form-control" placeholder="USERNAME" required />
+      </div>
+      <div class="form-group">
+        <i class="fas fa-key"></i>
+        <input type="password" name="password" class="form-control" placeholder="PASSWORD" required />
+      </div>
+      <button type="submit" class="btn-login">
+        <i class="fas fa-sign-in-alt"></i> LOGIN ACCESS
+      </button>
+    </form>
+    
+    <a class="btn-access" href="/#plans">
+      <i class="fas fa-crown"></i> VIEW PLANS & PRICING
+    </a>
+    
+    <div class="footer">
+        © 2025 - 2026 by Mann Force X.
+        <br>
+        <span style="color:var(--neon-blue);">LUPAKAN MASALAH NIKMATILAH HIDUP MU.</span>
+    </div>
+  </div>
+
+  <div id="notification" class="notification">
+    <i class="fas fa-check-circle"></i> 
+    <span id="notification-text"></span>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/jnicol/particleground/jquery.particleground.min.js"></script>
+  
+  <script>
+    // Inisialisasi ParticleGround
+    $(document).ready(function() {
+        $('#particles').particleground({
+            dotColor: 'rgba(0, 229, 255, 0.5)', /* Dot warna neon */
+            lineColor: 'rgba(0, 229, 255, 0.2)', /* Garis warna neon */
+            minSpeedX: 0.1,
+            maxSpeedX: 0.6,
+            minSpeedY: 0.1,
+            maxSpeedY: 0.6,
+            density: 15000, /* Kerapatan lebih tinggi */
+            particleRadius: 3,
+            lineWidth: 0.5,
+            directionX: 'center',
+            directionY: 'center',
+            parallax: true
+        });
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const msg = params.get("msg");
+    const type = params.get("type") || "info";
+    if (msg) { showNotification(decodeURIComponent(msg), type); }
+    
+    function showNotification(message, type = "info") {
+      const notification = document.getElementById("notification");
+      const notificationText = document.getElementById("notification-text");
+      notificationText.textContent = message;
+      notification.className = "notification";
+      notification.classList.add("show");
+      
+      let icon = "fas fa-info-circle";
+      if (type === "error") {
+        icon = "fas fa-times-circle"; // Icon error yang lebih sesuai
+        notification.classList.add("error");
+      } else if (type === "success") {
+        icon = "fas fa-check-circle";
+        notification.classList.add("success");
+      } else {
+        notification.classList.add("info");
+      }
+      
+      notification.innerHTML = `<i class="${icon}"></i> <span id="notification-text">${message}</span>`;
+      setTimeout(() => { notification.classList.remove("show"); }, 5000);
+    }
+    
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href.split('?')[0]);
+    }
+    
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      // Demo logic
+      const username = this.username.value.toLowerCase();
+      const password = this.password.value.toLowerCase();
+      
+      if (username === "demo" && password === "error") {
+        e.preventDefault();
+        showNotification("Username atau password salah. Coba: demo/pass", "error");
+      } else if (username === "demo" && password === "pass") {
+         e.preventDefault();
+         showNotification("Login Berhasil! Mengalihkan...", "success");
+         // Contoh pengalihan setelah 2 detik
+         setTimeout(() => { window.location.href = "/dashboard"; }, 2000);
+      }
+      // Jika bukan demo/error atau demo/pass, formulir akan submit normal
+    });
+  </script>
+</body>
+</html>
